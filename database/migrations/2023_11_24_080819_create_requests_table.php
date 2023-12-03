@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('faqs', function (Blueprint $table) {
+        Schema::create('requests', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->text('question');
-            $table->text('answer');
+            $table->uuid("student_id");
+            $table->uuid("teacher_id");
+            $table->integer('booking_status'); // 0 wait 1 approved 2 reject
+            $table->date('booking_date');
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('faqs');
+        Schema::dropIfExists('requests');
     }
 };

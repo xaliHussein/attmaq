@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Sessiongroup extends Model
 {
     use HasFactory, HasUuids;
+    protected $with = ["teacher"];
 
     protected $fillable = [
         'teacher_id',
@@ -21,7 +22,7 @@ class Sessiongroup extends Model
     ];
 
     public function teacher(){
-        return $this->belongsTo(Teacher::class);
+        return $this->belongsTo(Teacher::class,'teacher_id');
     }
 
     protected $casts = [

@@ -14,12 +14,10 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
-<<<<<<< HEAD
         "mcamara/laravel-localization": "^1.8",
-        "mckenziearts/laravel-notify": "^2.4"
-=======
-        "mcamara/laravel-localization": "^1.8"
->>>>>>> b71d6a1 (add notifications)
+        "mckenziearts/laravel-notify": "^2.4",
+        "twilio/sdk": "^7.12",
+        "vonage/client": "^4.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

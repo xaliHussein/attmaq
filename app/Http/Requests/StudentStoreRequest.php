@@ -26,11 +26,11 @@ class StudentStoreRequest extends FormRequest
             "phone" => "required|string|max:11|min:11|unique:students,phone",
             "password" => "required|string|max:255|min:8",
             "age" => "required|integer",
-            "gender" => "required|string|max:255|min:4",
+            "gender" => "required|string|max:255|min:3",
             "country" => "required|string|max:255|min:3",
             "city" => "required|string|max:255|min:3",
             "image" => "nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
-            "main_language" => "required|string|max:255|min:3",
+            "main_language" => "nullable|string|max:255|min:3",
         ];
     }
 
