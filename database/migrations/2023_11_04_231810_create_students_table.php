@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('phone')->unique();
+            $table->string('zipcode');
             $table->string('password');
             $table->integer('age');
             $table->string('gender');
@@ -22,7 +23,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('country');
             $table->string('city');
-            $table->string('main_language')->nullable();
+            $table->boolean('main_language')->default(true);
             $table->boolean('is_active')->default(true);
             $table->boolean('account_status')->default(false); // 0  inactive 1 active
             $table->rememberToken();

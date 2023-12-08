@@ -15,12 +15,13 @@ class StudentSeeder extends Seeder
     {
         Student::create([
             'name' => 'علي حسين علي',
-            'phone' => '07800000000',
+            'phone' => '07810238491',
             'password' => bcrypt('fffjjjqq'),
             'age' => "23",
             'country' => "العراق",
             'gender' => "ذكر",
             'city' => "بغداد",
+            'image'=>'/images/student/profile.png',
             'main_language' => "عربي",
         ]);
     }

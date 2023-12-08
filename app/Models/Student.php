@@ -26,7 +26,8 @@ class Student extends Authenticatable
         'city',
         'main_language',
         'otp',
-        'is_active'
+        'is_active',
+        'zipcode'
     ];
 
 

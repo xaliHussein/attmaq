@@ -17,9 +17,9 @@ class sessionsSeeder extends Seeder
             'teacher_id' => '9aae19e5-7a05-4ab2-bc2e-9ddac328fe3a',
             'title' => 'اساسيات قراءة القران',
             'content' => 'تعلم اساسيات قراءة القران الكريم و نطق الحروف',
-            'start-date' => '2023-11-25',
-            'start-time' => '16:15:10',
-            'url' => 'http://localhost/phpmyadmin/',
+            'start_date' => '2023-12-6',
+            'start_time' => '19:20:00',
+            'url' => 'https://meet.google.com/amq-axuc-efn',
 
         ]);
     }

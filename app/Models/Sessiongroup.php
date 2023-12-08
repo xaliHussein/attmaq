@@ -17,8 +17,8 @@ class Sessiongroup extends Model
         'title',
         'content',
         'url',
-        'start-date',
-        'start-time'
+        'start_date',
+        'start_time'
     ];
 
     public function teacher(){

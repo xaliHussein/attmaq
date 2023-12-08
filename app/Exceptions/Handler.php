@@ -2,8 +2,12 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Exception;
 use Throwable;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -24,7 +28,32 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {
-            //
+            if ($exception instanceof Exception) {
+                if ($exception->getMessage() == 'Route [login] not defined.') {
+                    return response()->json(
+                        [
+                            'message' => $exception->getMessage(),
+                        ],
+                        402
+                    );
+                } elseif ($exception->getMessage() == "غير مصرح لك بالدخول") {
+                    return response()->json(
+                        [
+                            'message' => $exception->getMessage(),
+                        ],
+                        403
+                    );
+                }
+            }
+            if ($exception instanceof AuthenticationException) {
+
+                return response()->json(
+                    [
+                        'message' => $exception->getMessage(),
+                    ],
+                    402
+                );
+            }
         });
     }
 }
