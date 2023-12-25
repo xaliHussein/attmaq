@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\FsqsController;
+use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\QuransController;
 use App\Http\Controllers\Api\BannersController;
@@ -15,15 +16,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/students/settings', [StudentController::class, 'settings'])->name('students.settings');
-    Route::get('/teachers', [StudentController::class, 'teachers'])->name('students.teachers');
-    Route::get('/notifications', [StudentController::class, 'notifications'])->name('students.notifications');
-    Route::get('/banners', [StudentController::class, 'banners'])->name('students.banners');
-    Route::get('/news', [StudentController::class, 'news'])->name('students.news');
-    Route::get('/faqs', [StudentController::class, 'faqs'])->name('students.faqs');
-});
-
 Route::post('/students/register', [StudentController::class, 'register'])->name('students.register');
 Route::post('/students/login', [StudentController::class, 'login'])->name('students.login');
 
@@ -34,8 +26,10 @@ route::post('register',[LoginController::class,'register']);
  route::post('get_number_phone',[LoginController::class,'getNumberPhone']);
  route::post('verify_authentication',[LoginController::class,'verifyAuthentication']);
  route::post('send_code_again',[LoginController::class,'sendCodeAgain']);
-//  route::post('sendCode',[LoginController::class,'sendCode']);
-
+ route::post('send_code_phone',[LoginController::class,'sendCodePhone']);
+ route::post('reset_password',[LoginController::class,'resetPassword']);
+ route::post('confirm_verification',[LoginController::class,'confirmVerification']);
+//  route::post('sendCode',[LoginController::class,'sendCode']);send_code_phone
 //  Route::middleware(['auth:api'])->group(function () {
     Route::middleware(['auth:sanctum'])->group(function () {
     Route::controller(TeachersController::class)->group(function () {
@@ -51,6 +45,7 @@ route::post('register',[LoginController::class,'register']);
             route::put('update_password_student','updatePasswordStudent');
             route::put('update_phone_student','updatePhoneStudent');
             route::put('update_image_student','updateImageStudent');
+            route::post('get_notifications_student','getNotificationsStudent');
 
         });
 
@@ -69,4 +64,8 @@ route::post('register',[LoginController::class,'register']);
             route::get('get_books','getBooks');
             route::post('download_pdf','downloadPdf');
         });
+        Route::controller(NewsController::class)->group(function () {
+            route::get('get_news','getNews');
+        });
+
     });

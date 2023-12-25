@@ -209,6 +209,16 @@ class StudentController extends Controller
             return $this->send_response(400,'ادخلت رمز تحقق غير صحيح',[],[]);
         }
     }
+    public function getNotificationsStudent(Request $request){
+        $request = $request->json()->all();
+        $notification = CustomNotification::where("student_id",$request['id']);
+        if (!isset($_GET['skip']))
+            $_GET['skip'] = 0;
+        if (!isset($_GET['limit']))
+            $_GET['limit'] = 10;
+        $res = $this->paging($notification->orderBy("created_at", "DESC"),  $_GET['skip'],  $_GET['limit']);
+        return $this->send_response(200, 'تم احضار جميع الاخبار بنجاح', [], $res["model"], null, $res["count"]);
+    }
 
 
 

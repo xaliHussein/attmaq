@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('country');
             $table->string('city');
-            $table->boolean('main_language')->default(true);
+            $table->string('main_language')->default("عربي");
             $table->boolean('is_active')->default(true);
             $table->boolean('account_status')->default(false); // 0  inactive 1 active
             $table->rememberToken();

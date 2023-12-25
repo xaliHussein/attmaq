@@ -27,7 +27,7 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
+        $this->renderable(function (Throwable $exception, $request) {
             if ($exception instanceof Exception) {
                 if ($exception->getMessage() == 'Route [login] not defined.') {
                     return response()->json(
