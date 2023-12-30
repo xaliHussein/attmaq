@@ -46,6 +46,7 @@ route::post('register',[LoginController::class,'register']);
             route::put('update_phone_student','updatePhoneStudent');
             route::put('update_image_student','updateImageStudent');
             route::post('get_notifications_student','getNotificationsStudent');
+            route::put('seen_notifications_student','seenNotificationsStudent');
 
         });
 

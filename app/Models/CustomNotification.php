@@ -15,5 +15,8 @@ class CustomNotification extends Model
         'session_id',
         'title',
         'body',
+        'seen',
+        'icon',
+        'color',
     ];
 }

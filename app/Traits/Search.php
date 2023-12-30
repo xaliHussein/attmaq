@@ -8,8 +8,6 @@ trait Search
 {
     public function search($data, $table)
     {
-        // return  $this->Clinic->getTable();
-        // return gettype($model);
         $data->where(function ($q) use ($table) {
             $columns = Schema::getColumnListing($table);
             foreach ($columns as $column) {

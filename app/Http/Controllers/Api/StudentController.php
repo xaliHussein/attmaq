@@ -220,6 +220,26 @@ class StudentController extends Controller
         return $this->send_response(200, 'تم احضار جميع الاخبار بنجاح', [], $res["model"], null, $res["count"]);
     }
 
+    public function seenNotificationsStudent(Request $request){
+        $request=$request->json()->all();
+           $validator = Validator::make($request, [
+            'notification.*.id' => 'required|exists:custom_notifications,id',
+        ]);
+
+         if ($validator->fails()) {
+            return $this->send_response(400, 'فشلة العملية', $validator->errors(), []);
+        }
+        $notifications=[];
+        foreach ($request['notification'] as $notify) {
+            $notification=CustomNotification::find($notify['id']);
+            $notification->update([
+                "seen"=>true
+            ]);
+            array_push($notifications, $notification);
+        }
+        return $this->send_response(200,'تم تحديث الاشعارات',[], $notifications);
+    }
+
 
 
 

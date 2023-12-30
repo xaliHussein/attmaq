@@ -23,6 +23,9 @@ return new class extends Migration
             $table->string('session_id')->nullable();
             $table->string('title');
             $table->string('body');
+            $table->string('color');
+            $table->string('icon');
+            $table->boolean("seen")->default(false);
             $table->timestamps();
         });
     }
