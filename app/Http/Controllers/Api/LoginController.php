@@ -62,9 +62,13 @@ class LoginController extends Controller{
         if(!$student || !password_verify($request['password'], $student->password)){
             return $this->send_response(400, 'هناك مشكلة تحقق من تطابق المدخلات', null, null, null);
         }
-        // else if($student->account_status == 0){
-        //     return $this->send_response(400, 'لم يتم تاكيد رقم الهاتف', '400', $student, null);
-        // }
+        else if($student->account_status == 0){
+            $random_code=$this->sendCode($student->zipcode,$student->phone);
+            $student->update([
+                'otp'=>$random_code
+            ]);
+            return $this->send_response(201, 'لم يتم تاكيد رقم الهاتف', $student, [], null);
+        }
         $token = $student->createToken('attmaq_student')->plainTextToken;
         return $this->send_response(200,'تم تسجيل الدخول بنجاح',[], $student, $token);
 
