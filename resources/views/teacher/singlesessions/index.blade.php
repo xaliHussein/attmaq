@@ -18,15 +18,46 @@
                         <h4 class="card-title mg-b-0">قائمه الحلقات الفردية</h4>
                     </div>
                     <br>
-                    <a style="font-family: 'IBM Plex Sans Arabic' " href="{{ route('single-sessions.create') }}" class="btn btn-dark text-white">اضافة حلقة فردية</a>
 
 
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table mg-b-0 text-md-nowrap">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th> اسم الطالب </th>
+                                <th>  نسبة التقدم </th>
+                                <th> عمليات </th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            $count = 1;
+                            ?>
+
+                            @foreach ($activeSingleSessions as $sessionItem )
+                                <tr>
+                                    <th scope="row">{{ $count++ }}</th>
+                                    <td>{{ $sessionItem->student['name']}}</td>
+                                    <td>{{ $sessionItem->progress }} %</td>
 
 
+                                    <td>
+                                        {{-- <ion-icon name="trash-outline"></ion-icon> --}}
+                                        <div class="row">
+                                            <a href="{{ route('single-sessions.edit', $sessionItem->id) }}" class="btn btn-transparent btn-icon"> 	<li class="icons-list-item"><i class="icon ion-md-settings"></i></li> </a>
+                                            <a href="{{ route('single-sessions.course-list', $sessionItem->id) }}" class="btn btn-transparent btn-icon"> 	<li class="icons-list-item"><i class="icon ion-md-eye"></i></li> </a>
+                                            <a href="{{ route('single-sessions.send-notifications', $sessionItem->id) }}" class="btn btn-transparent btn-icon"> 	<li class="icons-list-item"><i class="icon ion-md-notifications"></i></li> </a>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                            </tbody>
                         </table>
                     </div>
                 </div>

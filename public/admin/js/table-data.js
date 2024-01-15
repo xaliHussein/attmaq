@@ -5,11 +5,7 @@ $(function(e) {
 		buttons: [ 'copy', 'excel', 'pdf', 'colvis' ],
 		responsive: true,
 		language: {
-<<<<<<< HEAD
 			searchPlaceholder: 'بحث...',
-=======
-			searchPlaceholder: 'Search...',
->>>>>>> b71d6a1 (add notifications)
 			sSearch: '',
 			lengthMenu: '_MENU_ ',
 		}
@@ -19,11 +15,7 @@ $(function(e) {
 	
 	$('#example1').DataTable({
 		language: {
-<<<<<<< HEAD
 			searchPlaceholder: 'بحث...',
-=======
-			searchPlaceholder: 'Search...',
->>>>>>> b71d6a1 (add notifications)
 			sSearch: '',
 			lengthMenu: '_MENU_',
 		}
@@ -59,7 +51,6 @@ $(function(e) {
     } );
 	
 	//Details display datatable
-<<<<<<< HEAD
 
 	$('#example-1 thead tr')
 	.clone(true)
@@ -72,19 +63,12 @@ $(function(e) {
 		select:true,
 		orderCellsTop: true,
         fixedHeader: true,
-=======
-	$('#example-1').DataTable( {
-		responsive: true,
->>>>>>> b71d6a1 (add notifications)
 		language: {
 			searchPlaceholder: 'Search...',
 			sSearch: '',
 			lengthMenu: '_MENU_',
 		},
-<<<<<<< HEAD
     
-=======
->>>>>>> b71d6a1 (add notifications)
 		responsive: {
 			details: {
 				display: $.fn.dataTable.Responsive.display.modal( {

@@ -10,6 +10,8 @@ use App\Http\Controllers\Api\BannersController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\SessionsController;
 use App\Http\Controllers\Api\TeachersController;
+use App\Http\Controllers\Api\SingleSessionController;
+use App\Http\Controllers\Api\WebsiteSettingsController;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -29,16 +31,16 @@ route::post('register',[LoginController::class,'register']);
  route::post('send_code_phone',[LoginController::class,'sendCodePhone']);
  route::post('reset_password',[LoginController::class,'resetPassword']);
  route::post('confirm_verification',[LoginController::class,'confirmVerification']);
-//  route::post('sendCode',[LoginController::class,'sendCode']);send_code_phone
-//  Route::middleware(['auth:api'])->group(function () {
+
+
     Route::middleware(['auth:sanctum'])->group(function () {
     Route::controller(TeachersController::class)->group(function () {
         route::get('get_most_prominent_teachers','getMostProminentTeachers');
+        route::get('get_available_readers_teachers','getAvailableReadersTeachers');
         route::get('get_teachers','getTeachers');
     });
 
         Route::controller(StudentController::class)->group(function () {
-            route::post('add_request','addRequest');
             route::post('get_student','getStudent');
             route::post('verify_phone_student','VerifyPhoneStudent');
             route::put('update_student','updateStudent');
@@ -52,6 +54,14 @@ route::post('register',[LoginController::class,'register']);
 
         Route::controller(SessionsController::class)->group(function () {
             route::get('get_sessions','getSessions');
+            route::post('create_session','createSession');
+        });
+        Route::controller(SingleSessionController::class)->group(function () {
+            route::get('get_current_sessions','getCurrentSession');
+            route::get('get_courses','getCourses');
+            route::get('get_lessons','getLessons');
+            route::post('create_session','createSession');
+            route::get('not_available_readers','NotAvailableReaders');
         });
 
         Route::controller(FsqsController::class)->group(function () {
@@ -67,6 +77,9 @@ route::post('register',[LoginController::class,'register']);
         });
         Route::controller(NewsController::class)->group(function () {
             route::get('get_news','getNews');
+        });
+        Route::controller(WebsiteSettingsController::class)->group(function () {
+            route::get('get_website_settings','getWebsiteSettings');
         });
 
     });

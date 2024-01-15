@@ -67,12 +67,9 @@
 
                                                             </form>
 
-<<<<<<< HEAD
                                                             <a href="{{ route('news.addbanner', $item->id) }}"> 	<li class="icons-list-item"><i class="icon ion-md-add-circle"></i></li> </a>
 
 
-=======
->>>>>>> b71d6a1 (add notifications)
                                                         </div>
 
 

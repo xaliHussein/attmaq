@@ -28,9 +28,12 @@ class StudentController extends Controller
     public function store(StudentStoreRequest $request){
         $validated = $request->validated();
 
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('student_images', 'public');
-            $validated['image'] = $imagePath;
+        if($request->hasFile('image')){
+            $path = $request->file('image')->store('temp');
+            $file = $request->file('image');
+            $fileName = $file->getClientOriginalName();
+            $img = $file->move(public_path('images/student'), $fileName);
+            $validated["image"] = '/images/student/' . $fileName;
         }
 
         $validated['password'] = bcrypt($validated['password']);
@@ -50,7 +53,7 @@ class StudentController extends Controller
         $student = Student::findOrFail($id);
         $validatedData = $request->validate([
             'name' => 'required|max:255',
-            'phone' => 'required|min:11|max:11',
+            'phone' => 'required|min:10|max:10',
             'age' => 'required|max:2',
             'gender' => 'required',
             'country' => 'required',
@@ -60,9 +63,12 @@ class StudentController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('student_images', 'public');
-            $validatedData['image'] = $imagePath;
+        if($request->hasFile('image')){
+            $path = $request->file('image')->store('temp');
+            $file = $request->file('image');
+            $fileName = $file->getClientOriginalName();
+            $img = $file->move(public_path('images/student'), $fileName);
+            $validatedData["image"] = '/images/student/' . $fileName;
         }
         $student->update($validatedData);
         smilify('success', 'تم تحديث بيانات المشترك بنجاح');

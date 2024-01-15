@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('qurans', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->string('name');
             $table->string('image');
             $table->string('contentpath');
             $table->timestamps();

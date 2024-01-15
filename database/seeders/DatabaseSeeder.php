@@ -15,10 +15,15 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call([
-            AdminSeeder::class,
-            StudentSeeder::class,
+            // AdminSeeder::class,
+            // StudentSeeder::class,
+            // teachersSeeder::class,
+            // FsqsSeeder::class,
+            // NewsSeeder::class,
+            // BooksSeeder::class,
+            // sessionsSeeder::class,
+            // websiteSettingsSeeder::class,
             teachersSeeder::class,
-            FsqsSeeder::class,
         ]);
     }
 }

@@ -1,47 +1,60 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+@extends('admin.layouts.auth-layout')
+@section('content')
+    <div class="container-fluid">
+        <div class="row no-gutter">
+            <!-- The image half -->
+            <div class="col-md-6 col-lg-6 col-xl-7 d-none d-md-flex bg-white">
+                <div class="row wd-100p mx-auto text-center">
+                    <div class="col-md-12 col-lg-12 col-xl-12 my-auto mx-auto wd-100p">
+                        <img style="height: 650px; object-fit: cover;" src="{{ asset('admin/img/q2.jpeg') }}"
+                             class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mx-auto" alt="logo">
+                    </div>
+                </div>
+            </div>
+            <!-- The content half -->
+            <div class="col-md-6 col-lg-6 col-xl-5 bg-white">
+                <div class="login d-flex align-items-center py-2">
+                    <!-- Demo content-->
+                    <div class="container p-0">
+                        <div class="row">
+                            <div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
+                                <div class="card-sigin">
+                                    <div class="card-sigin">
+                                        <div class="main-signup-header">
+                                            <div
+                                                style="display: flex;flex-direction: column;align-items: center; margin-bottom: 16px;">
+                                                <img src="{{ asset('assets/logo/hand.png') }}"
+                                                     style="border-radius: 8px;">
+                                            </div>
+                                            <h2
+                                                style="color: black; font-weight: bold; text-align: center; margin-bottom: 16px">
+                                                مقرآة العتبة العباسية</h2>
+                                            <form action="{{ route('login') }}" method="POST">
+                                                @csrf
+                                                <div class="form-group">
+                                                    <label>البريد الالكتروني</label> <input name="email" class="form-control"
+                                                                                            placeholder="ادخل البريد الالكتروني الخاص بك"
+                                                                                            type="text" value="{{old('email')}}" required autofocus autocomplete="username">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>كلمة المرور</label> <input class="form-control"
+                                                                                      placeholder="كلمة المرور" name="password" type="password" required autocomplete="current-password">
+                                                </div><button type="submit" class="btn btn-main-primary btn-block mt-5">تسجيل
+                                                    دخول</button>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End -->
+                </div>
+            </div><!-- End -->
         </div>
+    </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ml-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+@endsection

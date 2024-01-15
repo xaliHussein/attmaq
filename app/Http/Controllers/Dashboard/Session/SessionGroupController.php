@@ -26,7 +26,15 @@ class SessionGroupController extends Controller
 
     public function store(SessionGroupRequest $request){
         $sessionGroup = $request->validated();
-        $sessionGroup = Sessiongroup::create($sessionGroup);
+
+       Sessiongroup::create([
+            "teacher_id" => $sessionGroup['teacher_id'],
+            "title" => $sessionGroup["title"],
+            "content" => $sessionGroup["content"],
+            "start_date" => $sessionGroup["start-date"],
+            "start_time" => $sessionGroup["start-time"],
+            "url" => $sessionGroup["url"]
+        ]);
         return redirect()->route('admin.sessions.index');
     }
 

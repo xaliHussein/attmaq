@@ -24,11 +24,7 @@
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
-<<<<<<< HEAD
 										<table class="table mg-b-0 text-md-nowrap" id="example1">
-=======
-										<table class="table mg-b-0 text-md-nowrap">
->>>>>>> b71d6a1 (add notifications)
 											<thead>
 												<tr>
 													<th>#</th>
@@ -68,23 +64,14 @@
 														<div class="row">
 														<a href="{{ route('teachers.destroy', $teacher->id) }}"> 	<li class="icons-list-item"><i class="icon ion-md-trash"></i></li> </a>
 														<a href="{{ route('teachers.edit', $teacher->id) }}"> 	<li class="icons-list-item"><i class="icon ion-md-build"></i></li> </a>
-<<<<<<< HEAD
                                                         <a href="{{ route('teachers.banner', $teacher->id) }}"> 	<li class="icons-list-item"><i class="icon ion-md-paper"></i></li> </a>
 														</div>
 
-=======
-														</div>
-													
->>>>>>> b71d6a1 (add notifications)
 
 													</td>
 												</tr>
 												@endforeach
-<<<<<<< HEAD
 
-=======
-										
->>>>>>> b71d6a1 (add notifications)
 											</tbody>
 										</table>
 									</div>
@@ -96,8 +83,4 @@
 
 						<!--/div-->
 					</div>
-<<<<<<< HEAD
 @endsection
-=======
-@endsection
->>>>>>> b71d6a1 (add notifications)

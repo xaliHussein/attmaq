@@ -168,7 +168,7 @@ class StudentController extends Controller
             return $this->send_response(400,'فشل عملية',$e->getMessage(),[]);
         }
     }
-        public function updateImageStudent(Request $request){
+    public function updateImageStudent(Request $request){
             $request = $request->json()->all();
             $validator= Validator::make($request,[
                 'id'=>'required|exists:students,id',
@@ -209,6 +209,7 @@ class StudentController extends Controller
             return $this->send_response(400,'ادخلت رمز تحقق غير صحيح',[],[]);
         }
     }
+
     public function getNotificationsStudent(Request $request){
         $request = $request->json()->all();
         $notification = CustomNotification::where("student_id",$request['id']);
@@ -239,58 +240,4 @@ class StudentController extends Controller
         }
         return $this->send_response(200,'تم تحديث الاشعارات',[], $notifications);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function Settings(){
-        $setting = Setting::first();
-
-        return response()->json([
-            'message' => 'Settings retrieved successfully',
-            'settings' => $setting,
-        ], 200);
-    }
-    public function notifications(){
-        $notifications= UserNotifications::all();
-
-        return response()->json([
-            'message' => 'Notifications retrieved successfully',
-            'notifications' => $notifications,
-        ], 200);
-    }
-    public function banners(){
-        $banner = Banner::all();
-
-        return response()->json([
-            'message' => 'Banner retrieved successfully',
-            'banner' => $banner,
-        ], 200);
-    }
-    public function news(){
-        $news = News::paginate(10);
-        return response()->json([
-            'message' => 'Banner retrieved successfully',
-            'banner' => $news,
-        ], 200);
-    }
-    public function faq(){
-        $faqs = Faq::all();
-        return response()->json([
-            'message' => 'Banner retrieved successfully',
-            'banner' => $faqs,
-        ], 200);
-    }
-
-
-
 }

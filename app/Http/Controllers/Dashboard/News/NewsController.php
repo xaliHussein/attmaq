@@ -39,8 +39,11 @@ class NewsController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('news_images', 'public');
-            $validatedData['image'] = $imagePath;
+            $path = $request->file('image')->store('temp');
+            $file = $request->file('image');
+            $fileName = $file->getClientOriginalName();
+            $img = $file->move(public_path('images/news'), $fileName);
+            $validatedData["image"] = '/images/news/' . $fileName;
         }
         $validatedData['url'] = $request->url;
 
@@ -80,8 +83,11 @@ class NewsController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('news_images', 'public');
-            $validatedData['image'] = $imagePath;
+            $path = $request->file('image')->store('temp');
+            $file = $request->file('image');
+            $fileName = $file->getClientOriginalName();
+            $img = $file->move(public_path('images/news'), $fileName);
+            $validatedData["image"] = '/images/news/' . $fileName;
         }
         $validatedData['url'] = $request->url;
 

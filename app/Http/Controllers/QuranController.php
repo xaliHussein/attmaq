@@ -13,7 +13,7 @@ class QuranController extends Controller
     public function index()
     {
         $qurans = Quran::all();
-        return view('admin.quran.index', compact('qurans'));
+        return view('admin.books.index', compact('qurans'));
     }
 
     /**
@@ -61,6 +61,6 @@ class QuranController extends Controller
      */
     public function destroy(Quran $quran)
     {
-     
+
     }
 }

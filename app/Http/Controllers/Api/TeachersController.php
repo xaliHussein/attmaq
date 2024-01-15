@@ -21,11 +21,24 @@ class TeachersController extends Controller
         ->orderByDesc('rating')
         ->limit(6)
         ->get();
-        return $this->send_response(200, 'تم جلب افضل الاساتذه بنجاح', [], $teachers,[]);
+        return $this->send_response(200, 'تم احضار افضل الاساتذه بنجاح', [], $teachers,[]);
     }
+    public function getAvailableReadersTeachers()
+    {
+        $teachers = Teacher::doesnthave('singlesession')
+        ->limit(6)
+        ->get();
+        return $this->send_response(200, 'تم احضار الاساتذه المتاحين بنجاح', [], $teachers,[]);
+    }
+
     public function getTeachers()
     {
-        $teachers = Teacher::select("*");
+        if(isset($_GET["available_readers"])){
+            $teachers = Teacher::doesnthave('singlesession');
+        }else{
+            $teachers = Teacher::select("*");
+        }
+
         if (isset($_GET["query"])) {
             $this->search($teachers, 'teachers');
         }
@@ -40,7 +53,7 @@ class TeachersController extends Controller
         if (!isset($_GET['limit']))
             $_GET['limit'] = 10;
         $res = $this->paging($teachers->orderBy("created_at", "DESC"),  $_GET['skip'],  $_GET['limit']);
-        return $this->send_response(200, 'تم جلب المنتجات في المخزن بنجاح', [], $res["model"], null, $res["count"]);
+        return $this->send_response(200, 'تم احضار جميع الاساتذه بنجاح', [], $res["model"], null, $res["count"]);
     }
 
 }

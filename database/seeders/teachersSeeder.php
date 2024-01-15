@@ -14,12 +14,12 @@ class teachersSeeder extends Seeder
     public function run(): void
     {
         Teacher::create([
-            'name' =>  'حسن محمد',
+            'name' =>  'علي حسين',
             'title' => "k1",
-            'phone' => '07803290006',
+            'phone' => '07803291006',
             'password' => bcrypt('123456'),
             'age' => 29,
-            'rating' => 3.5,
+            'rating' => 4.5,
             'gender' => "ذكر",
         ]);
 

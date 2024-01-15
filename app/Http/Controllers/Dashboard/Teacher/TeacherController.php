@@ -27,9 +27,12 @@ class TeacherController extends Controller
 
         $validated = $request->validated();
 
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('teacher_images', 'public');
-            $validated['image'] = $imagePath;
+        if($request->hasFile('image')){
+            $path = $request->file('image')->store('temp');
+            $file = $request->file('image');
+            $fileName = $file->getClientOriginalName();
+            $img = $file->move(public_path('images/teacher'), $fileName);
+            $validated["image"] = '/images/teacher/' . $fileName;
         }
 
         $validated['password'] = bcrypt($validated['password']);
@@ -82,8 +85,11 @@ class TeacherController extends Controller
         $validated = $validated->validated();
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('teacher_images', 'public');
-            $validated['image'] = $imagePath;
+            $path = $request->file('image')->store('temp');
+            $file = $request->file('image');
+            $fileName = $file->getClientOriginalName();
+            $img = $file->move(public_path('images/teacher'), $fileName);
+            $validated["image"] = '/images/teacher/' . $fileName;
             $teacher = $this->getTeacher($validated);
             $teacher->image = $validated['image'];
             $teacher->save();

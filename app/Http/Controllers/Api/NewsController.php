@@ -5,16 +5,13 @@ namespace App\Http\Controllers\Api;
 use App\Models\News;
 use App\Traits\Filter;
 use App\Traits\Search;
-use App\Models\Teacher;
 use App\Traits\OrderBy;
 use App\Traits\Pagination;
 use App\Traits\UploadImage;
 use App\Traits\SendResponse;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class NewsController extends Controller
-{
+class NewsController extends Controller{
     use SendResponse, Pagination,Search, Filter, OrderBy, UploadImage;
     public function getNews()
     {
@@ -36,5 +33,4 @@ class NewsController extends Controller
         $res = $this->paging($news->orderBy("created_at", "DESC"),  $_GET['skip'],  $_GET['limit']);
         return $this->send_response(200, 'تم احضار جميع الاخبار بنجاح', [], $res["model"], null, $res["count"]);
     }
-
 }

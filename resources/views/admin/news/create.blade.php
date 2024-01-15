@@ -64,11 +64,7 @@
 
                         <div class="form-group mb-0 mt-3 justify-content-end">
                             <div>
-<<<<<<< HEAD
                                 <button type="submit" class="btn btn-primary">حفظ</button>
-=======
-                                <button type="submit" class="btn btn-secondary">حفظ</button>
->>>>>>> b71d6a1 (add notifications)
                             </div>
                         </div>
                     </form>

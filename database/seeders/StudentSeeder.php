@@ -16,6 +16,8 @@ class StudentSeeder extends Seeder
         Student::create([
             'name' => 'علي حسين علي',
             'phone' => '07810238491',
+            'zipcode' => '+964',
+            'otp' => '456845',
             'password' => bcrypt('fffjjjqq'),
             'age' => "23",
             'country' => "العراق",

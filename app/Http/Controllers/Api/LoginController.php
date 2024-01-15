@@ -25,25 +25,63 @@ class LoginController extends Controller{
     {
 
         $random_code= substr(str_shuffle("0123456789"), 0, 6);
-        // try {
+        try {
 
-        //     $message = 'Your OTP is: '.$random_code;
+            $message = 'Your OTP is: '.$random_code;
 
-        //     $account_sid = "ACfcaee03a4c1d6430a9528f61997fb34d";
-        //     $auth_token = "bf59159a51d35ad636e8701f97c73474";
-        //     $twilio_number = "+14124604159";
+            $account_sid = env('TWILIO_ACCOUNT_SID');
+            $auth_token = env('TWILIO_AUTH_TOKEN');
+            $twilio_number = env('TWILIO_FROM');
 
-        //     $client = new Client($account_sid, $auth_token);
-        //     $client->messages->create($zipcode.$number_phone, [
-        //         'from' => $twilio_number,
-        //         'body' => $message
-        //     ]);
+            $client = new Client($account_sid, $auth_token);
+            $client->messages->create($zipcode.$number_phone, [
+                'from' => $twilio_number,
+                'body' => $message
+            ]);
             return $random_code;
 
-        // }catch (Exception $e) {
-        //     return $this->send_response(400,'فشل عملية',$e->getMessage(),[]);
-        // }
+        }catch (Exception $e) {
+            return $this->send_response(400,'فشل عملية',$e->getMessage(),[]);
+        }
     }
+
+    public function resetPassword(Request $request){
+        $request= $request->json()->all();
+        $validator= Validator::make($request,[
+            'id'=>'required',
+            "password_new" => "required|string|max:255|min:8",
+        ]);
+        if($validator->fails()){
+            return $this->send_response(400,'فشل عملية ',$validator->errors(),[]);
+        }
+
+        $student = Student::where('id', $request['id'])->first();
+        $student->update([
+            'password'=>bcrypt($request['password_new'])
+        ]);
+        return $this->send_response(200,'تم تغير كلمة المرور بنجاح',[], []);
+    }
+
+
+    public function confirmVerification(Request $request){
+        $request= $request->json()->all();
+        $validator= Validator::make($request,[
+            'phone'=>'required|exists:students,phone',
+            'otp'=>'required|min:6|max:6',
+        ]);
+        if($validator->fails()){
+            return $this->send_response(400,'فشل عملية ',$validator->errors(),[]);
+        }
+
+        $student = Student::where('phone', $request['phone'])->first();
+        if($request['otp'] == $student->otp){
+            return $this->send_response(200,'تم التحقق بنجاح',[],Student::find($student->id));
+        }else{
+            return $this->send_response(400,'ادخلت رمز تحقق غير صحيح',[],[]);
+        }
+    }
+
+
 
     public function login(Request $request){
         $request = $request->json()->all();
@@ -62,17 +100,14 @@ class LoginController extends Controller{
         if(!$student || !password_verify($request['password'], $student->password)){
             return $this->send_response(400, 'هناك مشكلة تحقق من تطابق المدخلات', null, null, null);
         }
-        else if($student->account_status == 0){
-            $random_code=$this->sendCode($student->zipcode,$student->phone);
-            $student->update([
-                'otp'=>$random_code
-            ]);
-            return $this->send_response(201, 'لم يتم تاكيد رقم الهاتف', $student, [], null);
-        }
+        // else if($student->account_status == 0){
+        //     return $this->send_response(400, 'لم يتم تاكيد رقم الهاتف', '400', $student, null);
+        // }
         $token = $student->createToken('attmaq_student')->plainTextToken;
         return $this->send_response(200,'تم تسجيل الدخول بنجاح',[], $student, $token);
 
     }
+
     public function register(Request $request){
         $request = $request->json()->all();
         $validator= Validator::make($request,[
@@ -97,6 +132,7 @@ class LoginController extends Controller{
             'country.required' => 'حقل البلد مطلوب',
             'city.required' => 'حقل المدينة مطلوب',
         ]);
+
         if($validator->fails()){
             return $this->send_response(400,'فشل العملية ',$validator->errors(),[]);
         }
@@ -114,6 +150,8 @@ class LoginController extends Controller{
         ]);
         return $this->send_response(200,'تم اضافة الحساب بنجاح',[], Student::find($student->id));
     }
+
+
     public function getNumberPhone(Request $request){
         $request = $request->json()->all();
         $validator = Validator::make($request,[
@@ -125,6 +163,25 @@ class LoginController extends Controller{
         $user = Student::find($request['id']);
         return $this->send_response(200,'تم جلب بيانات المستخدم',[], $user);
     }
+
+    public function sendCodePhone(Request $request){
+        $request= $request->json()->all();
+        $validator= Validator::make($request,[
+            'phone'=>'required|exists:students,phone',
+            'zipcode'=>'required',
+        ]);
+        if($validator->fails()){
+            return $this->send_response(400,'فشل عملية ',$validator->errors(),[]);
+        }
+
+        $student = Student::where('phone', $request['phone'])->first();
+        $random_code= $this->sendCode($request['zipcode'],$request['phone']);
+        $student->update([
+            'otp'=>$random_code
+        ]);
+        return $this->send_response(200,'تم ارسال رمز التحقق',[], $student->phone);
+    }
+
     public function verifyAuthentication(Request $request){
         $request= $request->json()->all();
         $validator= Validator::make($request,[
@@ -145,6 +202,7 @@ class LoginController extends Controller{
             return $this->send_response(400,'ادخلت رمز تحقق غير صحيح',[],[]);
         }
     }
+
     public function sendCodeAgain(Request $request){
         $request= $request->json()->all();
         $validator= Validator::make($request,[
@@ -160,55 +218,4 @@ class LoginController extends Controller{
         ]);
         return $this->send_response(200,'تم ارسال رمز التحقق بنجاح',[],[]);
     }
-    public function sendCodePhone(Request $request){
-        $request= $request->json()->all();
-        $validator= Validator::make($request,[
-            'phone'=>'required|exists:students,phone',
-            'zipcode'=>'required',
-        ]);
-        if($validator->fails()){
-            return $this->send_response(400,'فشل عملية ',$validator->errors(),[]);
-        }
-
-        $student = Student::where('phone', $request['phone'])->first();
-        $random_code= $this->sendCode($request['zipcode'],$request['phone']);
-            $student->update([
-                'otp'=>$random_code
-            ]);
-        return $this->send_response(200,'تم ارسال رمز التحقق',[], $student->phone);
-    }
-    public function confirmVerification(Request $request){
-        $request= $request->json()->all();
-        $validator= Validator::make($request,[
-            'phone'=>'required|exists:students,phone',
-            'otp'=>'required|min:6|max:6',
-        ]);
-        if($validator->fails()){
-            return $this->send_response(400,'فشل عملية ',$validator->errors(),[]);
-        }
-
-        $student = Student::where('phone', $request['phone'])->first();
-        if($request['otp'] == $student->otp){
-            return $this->send_response(200,'تم التحقق بنجاح',[],Student::find($student->id));
-        }else{
-            return $this->send_response(400,'ادخلت رمز تحقق غير صحيح',[],[]);
-        }
-    }
-    public function resetPassword(Request $request){
-        $request= $request->json()->all();
-        $validator= Validator::make($request,[
-            'id'=>'required',
-            "password_new" => "required|string|max:255|min:8",
-        ]);
-        if($validator->fails()){
-            return $this->send_response(400,'فشل عملية ',$validator->errors(),[]);
-        }
-
-        $student = Student::where('id', $request['id'])->first();
-        $student->update([
-            'password'=>bcrypt($request['password_new'])
-        ]);
-        return $this->send_response(200,'تم تغير كلمة المرور بنجاح',[], []);
-    }
-
 }

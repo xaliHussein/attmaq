@@ -30,7 +30,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="number" name="phone" class="form-control" id="inputName" placeholder="رقم هاتف المشترك"
+                                    <input type="text" name="phone" class="form-control" id="inputName" placeholder="رقم هاتف المشترك"
                                         required>
                                 </div>
                             </div>

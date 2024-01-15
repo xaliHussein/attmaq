@@ -10,11 +10,8 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
 
 
-=======
->>>>>>> b71d6a1 (add notifications)
     <!-- row opened -->
     <div class="row row-sm">
         <div class="col-xl-12">
@@ -36,15 +33,11 @@
                         </span>
 
                     </a>
-<<<<<<< HEAD
                     <br>
-=======
->>>>>>> b71d6a1 (add notifications)
 
 
                 </div>
                 <div class="card-body">
-<<<<<<< HEAD
 
 
 
@@ -85,10 +78,6 @@
 
                     <div class="table-responsive">
                         <table class="table mg-b-0 text-md-nowrap" id="example1">
-=======
-                    <div class="table-responsive">
-                        <table class="table mg-b-0 text-md-nowrap">
->>>>>>> b71d6a1 (add notifications)
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -121,11 +110,7 @@
                                         {{ $session->content }}
                                     </td>
                                     <td>
-<<<<<<< HEAD
                                      <a href="{{ $session->url }}" target="_blank">Visit</a>
-=======
-                                     <a href="{{ $session->url }}" target="_blank">   {{ $session->url }} </a>
->>>>>>> b71d6a1 (add notifications)
                                     </td>
 
 									<td>
@@ -133,15 +118,10 @@
 										<div class="row">
 										<a href="{{ route('admin.sessions.destroy', $session->id) }}"> 	<li class="icons-list-item"><i class="icon ion-md-trash"></i></li> </a>
 										<a href="{{ route('admin.sessions.edit', $session->id) }}"> 	<li class="icons-list-item"><i class="icon ion-md-build"></i></li> </a>
-<<<<<<< HEAD
 										<button class="btn btn-icon" onclick="copyUrl('{{ $session->url }}')"> 	<li class="icons-list-item"><i class="icon ion-md-clipboard"></i></li> </button>
                                             <a href="{{ route('admin.sessions.addbanner', $session->id) }}"> 	<li class="icons-list-item"><i class="icon ion-md-add-circle"></i></li> </a>
 										</div>
 
-=======
-										</div>
-									
->>>>>>> b71d6a1 (add notifications)
 
 									</td>
 								</tr>
@@ -153,7 +133,6 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
 
     </div>
 
@@ -169,11 +148,4 @@
 
             }
     </script>
-=======
-        <!--/div-->
-
-
-        <!--/div-->
-    </div>
->>>>>>> b71d6a1 (add notifications)
 @endsection

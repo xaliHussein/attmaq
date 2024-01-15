@@ -14,7 +14,7 @@ class Teacher extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable, HasUuids;
 
     protected $guard = 'teacher';
-
+    // protected $with = ['singlesession'];
 
     protected $fillable = [
         'name',
@@ -31,5 +31,8 @@ class Teacher extends Authenticatable
         'password',
     ];
 
+    public function singlesession(){
+        return $this->hasMany(SingleSession::class);
+    }
 
 }

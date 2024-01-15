@@ -17,10 +17,8 @@ class NotificationsSeeder extends Seeder
             'student_id' => '9ab2c8ba-2441-48de-9e53-2b4c1e3e7127',
             'title' => 'جلسة خاصة',
             'body' => 'تم الموافقة على جلسة الخاصة من قبل الاستاذ',
-            'color' => 'green darken-1',
-            'icon' => 'check-circle',
-
-
+            'color' => 'orange darken-1',
+            'icon' => 'timer',
         ]);
     }
 }

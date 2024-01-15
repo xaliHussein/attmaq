@@ -18,13 +18,9 @@
 
     <link href="{{ asset('admin/css/icons.css') }}" rel="stylesheet">
 
-<<<<<<< HEAD
 
     <link href="{{ asset('admin/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
 
-=======
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"/>
->>>>>>> b71d6a1 (add notifications)
     <!--  Right-sidemenu css -->
     <link href="{{ asset('admin/plugins/sidebar/sidebar.css') }}" rel="stylesheet">
 
@@ -34,7 +30,6 @@
     <!--  Custom Scroll bar-->
     <link href="{{ asset('admin/plugins/mscrollbar/jquery.mCustomScrollbar.css') }}" rel="stylesheet" />
 
-<<<<<<< HEAD
     <link href="{{ asset('admin/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('admin/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/plugins/datatable/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" />
@@ -46,11 +41,6 @@
     <link rel="stylesheet" href="{{ asset('admin/css/sidemenu.css') }}">
 
     @notifyCss
-=======
-    <!--  Left-Sidebar css -->
-    <link rel="stylesheet" href="{{ asset('admin/css/sidemenu.css') }}">
-
->>>>>>> b71d6a1 (add notifications)
 
     <!--- Style css --->
     <link href="{{ asset('admin/css-rtl/style.css') }}" rel="stylesheet">
@@ -106,15 +96,12 @@
 
     <div class="page">
         @include('admin.layouts.sidebar')
-<<<<<<< HEAD
 
         <div style="z-index: 9999">
             @include('notify::components.notify')
 
         </div>
 
-=======
->>>>>>> b71d6a1 (add notifications)
         <div class="main-content app-content">
             <!-- main-header opened -->
             <div class="main-header sticky side-header nav nav-item">
@@ -144,15 +131,10 @@
 
                             <div class="nav-item">
                                 <a class="new nav-link full-screen-link" href="{{ route('admin.logout') }}">
-<<<<<<< HEAD
                                     <svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" fill="none"
                                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
-=======
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
->>>>>>> b71d6a1 (add notifications)
                                     </svg>
                                 </a>
                             </div>
@@ -165,11 +147,8 @@
             <!-- container opened -->
             <div class="container-fluid w-100">
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> b71d6a1 (add notifications)
                 @if ($errors->any())
 
                     @foreach ($errors->all() as $error)
@@ -181,7 +160,6 @@
                             <strong>{{ $error }}</strong>
                         </div>
                     @endforeach
-<<<<<<< HEAD
                 @endif
                 @if (isset($_SESSION['success']))
 
@@ -197,10 +175,6 @@
 
 
 
-=======
-
-                @endif
->>>>>>> b71d6a1 (add notifications)
                 @yield('main-content')
             </div>
         </div>
@@ -230,7 +204,6 @@
     <script src="{{ asset('admin/plugins/jquery/jquery.min.js') }}"></script>
 
     <!-- Bootstrap Bundle js -->
-<<<<<<< HEAD
     <script src="{{ asset('admin/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 
     <!--Internal  Chart.bundle js -->
@@ -238,16 +211,6 @@
     <script src="{{ asset('admin/plugins/parsleyjs/parsley.min.js')}}"></script>
 
     <script src="{{ asset('admin/js/form-validation.js') }}"></script>
-=======
-    <script src="{{ asset('admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-    <!--Internal  Chart.bundle js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.js"></script>
-    <!-- Ionicons js -->
-    <script src="{{ asset('admin/plugins/ionicons/ionicons.js') }}"></script>
->>>>>>> b71d6a1 (add notifications)
 
     <!-- Moment js -->
     <script src="{{ asset('admin/plugins/moment/moment.js') }}"></script>
@@ -268,7 +231,6 @@
     <!-- Custom Scroll bar Js-->
     <script src="{{ asset('admin/plugins/mscrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>
 
-<<<<<<< HEAD
     <!-- Internal Data tables -->
     <script src="{{ asset('admin/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('admin/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
@@ -290,8 +252,6 @@
     <!--Internal  Datatable js -->
     <script src="{{ asset('admin/js/table-data.js') }}"></script>
 
-=======
->>>>>>> b71d6a1 (add notifications)
     <!-- Rating js-->
     <script src="{{ asset('admin/plugins/rating/jquery.rating-stars.js') }} "></script>
     <script src="{{ asset('admin/plugins/rating/jquery.barrating.js') }}"></script>
@@ -308,12 +268,9 @@
     <!-- Left-menu js-->
     <script src="{{ asset('admin/plugins/side-menu/sidemenu.js') }} "></script>
 
-<<<<<<< HEAD
     <script src="{{  asset('admin/plugins/select2/js/select2.min.js') }}"></script>
 
 
-=======
->>>>>>> b71d6a1 (add notifications)
 
     <!--Internal  index js -->
     <script src="{{ asset('admin/js/index.js') }}"></script>
@@ -321,11 +278,7 @@
     <!-- Apexchart js-->
 
     <script src="{{ asset('admin/js/custom.js') }}"></script>
-<<<<<<< HEAD
     @notifyJs
-=======
-
->>>>>>> b71d6a1 (add notifications)
 
 </body>
 

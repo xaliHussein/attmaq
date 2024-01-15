@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
 
 class StudentStoreRequest extends FormRequest
 {
@@ -14,25 +16,38 @@ class StudentStoreRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json(
+            [
+                'success'   => false,
+                'message'   => $validator->errors()->first(),
+                'data'      => $validator->errors()->first()
+            ],
+            403
+
+
+        ));
+    }
+
+
     public function rules(): array
     {
         return [
             "name" => "required|string|max:255|min:3|unique:students,name",
-            "phone" => "required|string|max:11|min:11|unique:students,phone",
+            "phone" => "required|string|max:14|min:14|unique:students,phone",
             "password" => "required|string|max:255|min:8",
             "age" => "required|integer",
-            "gender" => "required|string|max:255|min:3",
+            "gender" => "required|string|max:255|min:4",
             "country" => "required|string|max:255|min:3",
             "city" => "required|string|max:255|min:3",
             "image" => "nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
-            "main_language" => "nullable|string|max:255|min:3",
+            "main_language" => "required|string|max:255|min:3",
         ];
     }
+
+    // +9467725467765
 
     /**
      * Get the error messages for the defined validation rules.
